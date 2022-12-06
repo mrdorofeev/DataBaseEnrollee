@@ -1,0 +1,205 @@
+*{
+    font-family: 'Roboto', sans-serif;
+} 
+
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li {
+    color: #ffffff;
+}
+
+body {
+    background: #212121;
+}
+
+a.article {
+    text-decoration: none;
+    color: inherit;
+}
+
+input{
+    padding: 10px 12px;
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #132274;
+    color: #000
+}
+
+
+        /* ////// SIDEBAR //////// */
+
+.sidebar {   
+    margin: 2rem 0;
+    background: #1d1d1d;
+    min-height: 500px;
+    border-radius: 5px;
+}
+
+.sidebar ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    
+}
+
+.sidebar ul a {
+    display: block;
+    padding: 15px 0px 15px 0px;
+    border-bottom: 1px solid #d6d6d6;
+    transition: all 0.3s;
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.sidebar ul a:hover{
+    padding-left: 8px;
+    transition: all 0.3s;
+}  
+
+.applications {
+    margin-top: 30px;
+    color: #fff;
+}
+
+.applications h2{
+    text-align: center;
+}
+
+.applications .title-table div{
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.applications .application div{
+    padding: 15px;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.applications a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.applications .application .edit {
+    color:aquamarine;
+}
+
+.applications .application .del {
+    color: rgb(255, 52, 52);
+}
+
+
+
+
+        /* ////// HEADER //////// */
+
+header {
+    background: #1d1d1d;
+    height: 70px;
+}
+ 
+header *{
+    color: #fff;
+}
+
+header h1 {
+    margin-top: 12px;
+}
+
+header h1 a {
+    color: #fff;
+}
+
+header h1 a:hover {
+    color: #fff;
+}
+
+header ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    float: right;
+}
+
+header ul li {
+    float: left;
+    position: relative;
+}
+
+header ul li a {
+    display: block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #fff;
+    padding: 22px;
+    /*transform: opacity 400ms ease;*/
+}
+
+header ul li a:hover {
+    background: #1d1d1d;
+    /*transition: 0.8s;*/
+    opacity: 0.6;
+
+}
+
+header ul li ul {
+    position: absolute;
+    top: 70px;
+    right: 0px;
+    width: 180px;   
+    display: none;
+    z-index: 9999;
+}
+
+header ul li:hover ul {
+    display: block;
+}
+
+header ul li ul li {
+    width: 100%;
+}
+
+header ul li ul li a{
+    padding: 10px;
+    background: #1d1d1d;
+}
+
+
+
+
+
+
+
+
+
+
+/*  /////  FOOTER  /////  */
+
+.footer {
+    background: #1d1d1d;
+    color: #fff;
+    position: relative;
+    margin-top: 100px;
+}
+
+.footer .footer-section {
+    padding: 22px;
+}
+
+.footer .contact span {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.footer .footer-bottom{
+    padding-bottom: 20px;
+    text-align: center;
+}

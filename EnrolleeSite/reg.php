@@ -1,6 +1,6 @@
 <?php 
-    include "path.php"; 
-    include "app/controllers/enrolleers.php";
+    include "path.php";
+    include "app/controllers/enrollees.php";
 ?>
  
 <!doctype html>

@@ -1,12 +1,14 @@
 <?php
 
 session_start();
-require('connect.php');
+require 'connect.php';
+
 
 function tt($value){
     echo '<pre>';
     print_r($value);
     echo '</pre>';
+    exit();
 }
 
 // проверка на выполнение запроса к БД
@@ -144,8 +146,7 @@ function delete($table, $id){
        
     // delete from enrollees where id = 3
     $sql = "delete from $table
-            where id = $id           
-            ";
+            where id =" . $id;
 
     $query = $pdo->prepare($sql);
     $query->execute();
@@ -153,13 +154,44 @@ function delete($table, $id){
 }
 
 
-/*
-$arrData = [
-    'firstName' => 'popnew',
-    'email' => 'popnew@mail.com'
-];
-*/
+//вывод ОП-м на главную
+function selectAllFromProgramsWithDepartments($table1, $table2, $limit, $offset){
+    global $pdo;
+    $sql = "select p.*, d.name_department 
+            from $table1 as p join $table2 as d 
+            on p.department_id = d.id
+            order by name_program
+            limit $limit offset $offset";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
 
-#delete('enrollees', 3);
-#update('enrollees', 3, $arrData);
-#insert('enrollees', $arrData);
+
+//поиск по заголовкам (примитивный)
+function searchInNameProgram($text, $table1, $table2){
+    $text = trim(strip_tags(stripslashes(htmlspecialchars($text))));
+    
+    global $pdo;
+    $sql = "select p.*, d.name_department 
+            from $table1 as p join $table2 as d 
+            on p.department_id = d.id
+            where p.name_program like '%$text%'
+            order by name_program";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+
+
+//количество строк в таблице
+function countRow($table){
+    global $pdo;
+    $sql = "select count(*) from $table";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchColumn();
+}

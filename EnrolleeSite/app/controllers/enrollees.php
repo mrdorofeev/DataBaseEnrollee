@@ -1,20 +1,21 @@
 <?php
-include "app/database/db.php";
+include SITE_ROOT . "/app/database/db.php";
 
-$errMsg='';
-
+$errMsg='';  
 
 function createSession($user){
     $_SESSION['id'] = $user['id'];
     $_SESSION['admin'] = $user['admin'];
     $_SESSION['firstName'] = $user['firstName'];
     if ($_SESSION['admin']){
-        header('location: ' . BASE_URL . 'admin/admin.php');
+        header('location: ' . BASE_URL . 'admin/applications/index.php');
     }
     else{
         header('location: ' . BASE_URL);
     } 
 }
+
+$enrollees = selectAll('enrollees');
 
 
 //форма регистрации
@@ -71,6 +72,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-auth'])){
     }
     else{
         $existence = selectOne('enrollees', ['email' => $emailAuth]);
+
         if ($existence && password_verify($passwordAuth, $existence['password'])){
             createSession($existence);
         }
@@ -81,4 +83,44 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-auth'])){
 }
 else{
     $emailAuth = '';
+}
+
+
+//удаление пользователя
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['del_id'])){
+    $id = $_GET['del_id'];
+    delete('enrollees', $id);
+    header('location: ' . BASE_URL . 'admin/enrollees/index.php');
+}
+
+
+//редактирование пользователя
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['edit_id'])){
+    $enrollee = selectOne('enrollees', ['id' => $_GET['edit_id']]);
+    $id = $enrollee['id'];
+    $firstName = $enrollee['firstName'];
+    $email = $enrollee['email'];
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-user'])){
+    $newfirstName= trim($_POST['newfirstName']);
+    $id = $_POST['id'];
+
+    if (mb_strlen($newfirstName, 'UTF8') === 1) {
+        $errMsg="Не бывает таких имён";
+    }
+    else if (mb_strlen($newfirstName, 'UTF8') === 0) {
+        $errMsg="Остались незаполненные поля";
+    }
+    else {
+        //закидываем только имя
+        $userup = [
+            'firstName' => $newfirstName
+        ];
+        $userup = update('enrollees', $id, $userup);
+        header('location: ' . BASE_URL . 'admin/enrollees/index.php');
+    }
+}
+else{
+    
 }

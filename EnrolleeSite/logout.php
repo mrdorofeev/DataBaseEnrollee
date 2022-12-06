@@ -1,6 +1,7 @@
 <?php
-include "path.php";
 session_start();
+
+include "path.php";
 
 unset($_SESSION['id']);
 unset($_SESSION['admin']);
