@@ -5,28 +5,17 @@ if (!$_SESSION){
     header('location: ' . BASE_URL . 'auth.php'); 
 }
 
-$errMsg = '';
 
-// форма создания заявки 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['applic-create'])){
-    tt($_POST);
-    $op_id = trim($_POST['oplist']);
-    
+$applications = selectAllApplications();
 
-    if ($op_id==='') {
-        $errMsg="Выбери образовательную программу";
-    }
-    //else if(){} проверка на наличие такой заявки у пользователя
-    else{
-        $existence = selectOne('programs', ['id' => $op_id]);
-        if($existence['id'] === $op_id) {
-            $errMsg="Вы уже подали заявку на данную образовательную программу"; 
-        }
-        else {
-            //вносим заявку в базу        
-        }
-    }     
+//удаление заявки админом
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['del_id'])){
+
+                                    //таблица, имя первой колонки, имя второй колонки, интересующий id из первой колонки, интересующий id из второй колонки
+    deleteFromTableWithCompositeKey('program_enrollee',
+                                    'program_id', 'enrollee_id',
+                                    $applications[$_GET['del_id']]['program_id'], $applications[$_GET['del_id']]['enrollee_id']);
+    header('location: ' . BASE_URL . 'admin/applications/index.php');
 }
-else{
 
-}
+

@@ -1,5 +1,6 @@
 <?php
-
+    include "../../path.php";
+    include "../../app/controllers/useractions.php"
 ?>
 
 <!doctype html>
@@ -29,25 +30,30 @@
         <?php include "../../app/include/sidebar-user.php"; ?>
 
         <div class="applications col-9">
-            <div class="row title-table">
-                <h2>Добавление дисциплины</h2>
+            <h2>Добавление дисциплины</h2>
+            <div class="mb-12 col-12 col-md-12 err">
+                <p><?=$errMsg?></p>
             </div>
 
-            <div class="col-6">
-            <label for="exams-list"class="form-label">Выбери предмет</label> 
-                <select class="form-select form-select-md mb-3" id="dep-list" aria-label=".form-select-lg example">
-                    <option selected></option>
-                    <option value="1">Русский язык</option>
-                    <option value="2">Математика</option>
-                    <option value="3">Информатика</option>
-                    <option value="4">История</option>
-                    <option value="5">Обществознание</option>
-                </select>
-            </div>
+            <form action="create.php" method="post">
+                <div class="col-5">
+                <label for="exams-list"class="form-label">Выбери предмет</label> 
+                    <select name="sub-list" class="form-select form-select-md mb-3" id="sub-list" aria-label=".form-select-lg example">
+                        <option selected></option>
+                        <?php foreach ($subjects as $key => $subject): ?>
+                        <option value="<?=$subject['id']; ?>"><?=$subject['name_subject']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="col-5">
+                        <label for="result" class="form-label">Набранные баллы</label>
+                        <input name="result" type="text" class="form-control" id="result" placeholder="0-100">
+                    </div>
+                </div>
 
-            <div class="col-12">
-                <a href="" class="btn btn-primary">Добавить</a>
-            </div>
+                <div class="c-button">
+                    <button type="submit" name="add-subject" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

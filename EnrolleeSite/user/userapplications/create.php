@@ -1,6 +1,6 @@
 <?php
     include "../../path.php";
-    include "../../app/controllers/applications.php";
+    include "../../app/controllers/useractions.php";
 ?>
 
 <!doctype html>
@@ -33,29 +33,24 @@
             <div class="row title-table">
                 <h2>Новая заявка</h2>
             </div>
-                <div class="col-9">
-                    <form action="create.php" method="post">
-                        <label for="deplist" class="form-label">Факультет</label> 
-                        <select class="form-select form-select-md mb-3" name="deplist" id="deplist" aria-label=".form-select-lg example">
-                            <option selected></option>
-                            <option value="1">Факультет прикладной математики — процессов управления</option>
-                            <option value="2">Факультет социологии</option>
-                            <option value="3">Экономический факультет</option>
-                        </select>
-                        <label for="oplist" class="form-label">Образовательная программа</label> 
-                        <select class="form-select form-select-sm" name="oplist" id="oplist" aria-label=".form-select-sm example">
-                            <option selected></option>
-                            <option value="1">Большие данные и распределенная цифровая платформа</option>
-                            <option value="3">Прикладная математика, фундаментальная информатика и программирование</option>
-                            <option value="4">Прикладные компьютерные технологии</option>
-                            <option value="5">Программирование и информационные технологии</option>
-                        </select>
+            <div class="mb-12 col-12 col-md-12 err">
+                <p><?=$errMsg?></p>
+            </div>
+            <div class="col-9">
+                <form action="create.php" method="post"> 
+                    <label for="oplist" class="form-label col-4">Образовательная программа</label> 
+                    <select class="form-select col-3" name="oplist" id="oplist" aria-label=".form-select-sm example">
+                        <option selected></option>
+                        <?php foreach ($programs as $key => $program): ?>
+                        <option value="<?=$program['id']; ?>"><?=$program['name_program']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
-                        <div class="col">
-                            <button name="applic-create" class="btn btn-primary" type="submit">Отправить</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="col">
+                        <button name="applic-create" class="btn btn-primary" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>

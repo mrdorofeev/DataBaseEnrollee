@@ -1,12 +1,6 @@
 <?php 
     include "path.php"; 
     include SITE_ROOT . "/app/database/db.php";
-    
-    $page = isset($_GET['page']) ? $_GET['page']: 1;
-    $limit = 6;
-    $offset = $limit * ($page - 1);
-    $total_pages = round(countRow('programs') / $limit, 0);
-
     include "app/controllers/infoForMain.php"; 
 ?>
 
@@ -37,7 +31,6 @@
         <div class="content row">
             <div class="main-content col-md-9 col-12">
                 <h2>Образовательные программы Санкт-Петербургского государственного университета</h2>
-                <?php //text() ?>
                 <div class="op row">
                     <?php foreach ($programs as $key => $program): ?>
                         <div class="op_description col-12 col-md-8">
@@ -45,7 +38,13 @@
                                 <a href="#" class="article"><?=$program['name_program'];?></a>
                             </h3>
                             <i><?=$program['name_department'] ?></i>
-                            <p class="preview-text">Бюджетных мест: <?=$program['student_amount'];?></p>
+                            <p class="preview-text">Бюджетных мест на программе: <i><?=$program['student_amount'];?></i></p>
+                            <h6>Минимальные баллы ЕГЭ<br></h6>
+                            <?php 
+                                $subjects = getSubjectsForProgram($program['id']);
+                                foreach ($subjects as $key => $subject): ?>
+                                <p><?=$subject['name_subject'] ?>: <i><?=$subject['min_result']; ?></i></p> 
+                            <?php endforeach; ?>       
                         </div> 
                     <?php endforeach; ?>
                 </div>
@@ -58,14 +57,14 @@
             <div class="sidebar col-md-3 col-12">
 
                 <div class="section search">
-                    <h3>Поиск</h3>
+                    <h4>Поиск</h4>
                     <form action="search.php" method="post">
-                        <input type="text" name="search-term" class="text-input" placeholder="Найти">
+                        <input type="text" name="search-term" class="text-input" placeholder="Введите запрос">
                     </form>
                 </div> 
 
                 <div class="section departments">
-                    <h3><a href="<?php echo BASE_URL . 'departments.php'?>" class="article">Факультеты</a></h3>
+                    <h4>Факультеты</a></h4>
 
                     <?php foreach ($departments as $key => $department): ?>
                         <ul>
@@ -76,8 +75,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     <?php include("app/include/footer.php"); ?>

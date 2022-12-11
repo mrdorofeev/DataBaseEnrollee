@@ -30,23 +30,23 @@
         <?php include "../../app/include/sidebar-admin.php"; ?>
 
         <div class="applications col-9">
-            <div class="col-12">
-                <a href="create.php" class="btn btn-primary">Новая заявка</a>
-            </div>
             <div class="row title-table">
                 <h2>Список заявок</h2>
-                <div class="col-1">ID</div>
-                <div class="col-4">Email абитуриента</div>
-                <div class="col-3">Заявка на ОП</div>
-                <div class="col-4">Действия</div>
+                <div class="col-1"></div>
+                <div class="col-2">Email абитуриента</div>
+                <div class="col-2">Имя</div>
+                <div class="col-4">Образовательная программа</div>
+                <div class="col-2"></div>
             </div>
-            <div class="row application">
-                <div class="id col-1">1</div>
-                <div class="enrolleeEmail col-4">enrollee@mail.ru</div>
-                <div class="applic col-3">ОП</div>
-                <div class="edit col-2"><a href="">Изменить</a></div>
-                <div class="del col-2"><a href="">Удалить</a></div>
-            </div>
+            <?php foreach ($applications as $key => $application): ?>
+              <div class="row application">
+                <div class="col-1"><?=$key + 1; ?></div>
+                <div class="col-2"><?=$application['email']; ?></div>
+                <div class="col-2"><?=$application['firstName']; ?></div>
+                <div class="col-4"><?=$application['name_program']; ?></div>
+                <div class="col-2"><a href="index.php?del_id=<?=$key; ?>">Удалить</a></div>
+              </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

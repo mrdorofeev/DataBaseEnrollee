@@ -33,19 +33,21 @@
             <div class="row title-table">
                 <h2>Информация o пользователях</h2>
                 <div class="col-1">ID</div>
-                <div class="col-4">Email абитуриента</div>
+                <div class="col-3">Email абитуриента</div>
                 <div class="col-3">Имя</div>
                 <div class="col-4">Действия</div>
             </div> 
-            <?php foreach ($enrollees as $key => $enrollee): ?>
-            <div class="row application">
-                <div class="id col-1"><?=$enrollee['id']; ?></div>
-                <div class="enrolleeEmail col-4"><?=$enrollee['email']; ?></div>
-                <div class="applic col-3"><?=$enrollee['firstName']; ?></div>
-                <div class="edit col-2"><a href="edit.php?edit_id=<?=$enrollee['id']; ?>">Изменить</a></div>
-                <div class="del col-2"><a href="index.php?del_id=<?=$enrollee['id']; ?>">Удалить</a></div>
-            </div>
-            <?php endforeach; ?>
+            <?php foreach ($enrollees as $key => $enrollee): 
+                    if ($enrollee['admin'] == 0): ?>
+              <div class="row application">
+                  <div class="id col-1"><?=$enrollee['id']; ?></div>
+                  <div class="enrolleeEmail col-3"><?=$enrollee['email']; ?></div>
+                  <div class="applic col-3"><?=$enrollee['firstName']; ?></div>
+                  <div class="edit col-2"><a href="edit.php?edit_id=<?=$enrollee['id']; ?>">Изменить</a></div>
+                  <div class="del col-2"><a href="index.php?del_id=<?=$enrollee['id']; ?>">Удалить</a></div>
+              </div>
+            <?php   endif;
+                  endforeach; ?>
         </div>
     </div>
 </div>

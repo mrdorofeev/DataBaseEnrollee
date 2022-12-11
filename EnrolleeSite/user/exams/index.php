@@ -1,6 +1,6 @@
 <?php
     include "../../path.php";
-    include "../../app/controllers/exams.php";
+    include "../../app/controllers/useractions.php";
 ?>
 
 <!doctype html>
@@ -30,11 +30,23 @@
         <?php include "../../app/include/sidebar-user.php"; ?>
 
         <div class="applications col-9">
-            <div class="col-12">
-                <a href="create.php" class="btn btn-primary">Добавить новый</a>
-            </div>
             <div class="row title-table">
                 <h2>Мои экзамены</h2>
+                <div class="col-1"></div>
+                <div class="col-3">Предмет</div>
+                <div class="col-2">Результат</div>
+                <div class="col-2"></div>
+            </div>
+            <?php foreach ($added_subjects as $key => $addedsubject): ?>
+              <div class="row application">
+                <div class="col-1"><?=$key + 1; ?></div>
+                <div class="col-3"><?=$addedsubject['name_subject']; ?></div>
+                <div class="col-2"><?=$addedsubject['result']; ?></div>
+                <div class="col-2"><a href="index.php?del_name=<?=$addedsubject['name_subject']; ?>">Удалить</a></div>
+              </div>
+            <?php endforeach; ?>
+            <div class="col-12">
+                <a href="create.php" class="btn btn-primary">Добавить новый</a>
             </div>
         </div>
     </div>

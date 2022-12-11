@@ -1,9 +1,7 @@
 <?php 
     include "path.php"; 
     include SITE_ROOT . "/app/database/db.php";
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-term'])){
-        $programs = searchInNameProgram($_POST['search-term'], 'programs', 'departments');
-    }
+    include "app/controllers/infoForMain.php"; 
 ?>
 
 
@@ -33,15 +31,21 @@
         <div class="content row">
             <div class="main-content col-md-9 col-12">
                 <h2>Вот что нашлось...</h2>
-                <?php if(!empty($programs)): ?>
+                <?php if(!empty($searchedprograms)): ?>
                     <div class="op row">
-                        <?php foreach ($programs as $key => $program): ?>
+                        <?php foreach ($searchedprograms as $key => $program): ?>
                             <div class="op_description col-12 col-md-8">
                                 <h3>
                                     <a href="#" class="article"><?=$program['name_program'];?></a>
                                 </h3>
                                 <i><?=$program['name_department'] ?></i>
-                                <p class="preview-text">Бюджетных мест: <?=$program['student_amount'];?></p>
+                                <p class="preview-text">Бюджетных мест на программе: <?=$program['student_amount'];?></p>
+                                <h6>Минимальные баллы ЕГЭ<br></h6>
+                                <?php 
+                                    $subjects = getSubjectsForProgram($program['id']);
+                                    foreach ($subjects as $key => $subject): ?>
+                                    <p><?=$subject['name_subject'] ?>: <i><?=$subject['min_result']; ?></i></p> 
+                                <?php endforeach; ?>       
                             </div> 
                         <?php endforeach; ?>
                     </div>
