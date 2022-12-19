@@ -8,7 +8,7 @@
             <nav class="col-8">
                 <ul>                        
                     <li>
-                        <a href="#" class="article">
+                        <a href="" class="article">
                         <?php echo $_SESSION['firstName'] ?>
                         </a>
                     <ul>

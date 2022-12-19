@@ -35,7 +35,7 @@
                     <?php foreach ($programs as $key => $program): ?>
                         <div class="op_description col-12 col-md-8">
                             <h3>
-                                <a href="#" class="article"><?=$program['name_program'];?></a>
+                                <a href="" class="article"><?=$program['name_program'];?></a>
                             </h3>
                             <i><?=$program['name_department'] ?></i>
                             <p class="preview-text">Бюджетных мест на программе: <i><?=$program['student_amount'];?></i></p>
@@ -68,7 +68,7 @@
 
                     <?php foreach ($departments as $key => $department): ?>
                         <ul>
-                            <li><a href="#" class="article"><?=$department['name_department'];?></a></li>                    
+                            <li><a href="" class="article"><?=$department['name_department'];?></a></li>                    
                         </ul>
                     <?php endforeach; ?>  
                 </div>

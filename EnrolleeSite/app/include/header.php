@@ -9,7 +9,7 @@
                     <li><a href="<?php echo BASE_URL ?>" class="article">Главная</a></li>
                     
                     <?php if(isset($_SESSION['id'])): ?>
-                        <li><a href="#" class="article">
+                        <li><a href="" class="article">
                             <?php echo $_SESSION['firstName']; ?>
                         </a>
                         <ul>
