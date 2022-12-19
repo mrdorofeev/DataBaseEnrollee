@@ -88,8 +88,8 @@ else{
 
 //удаление пользователя
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['del_id'])){
-    $id = $_GET['del_id'];
-    delete('enrollees', $id);
+    $enrollee_id = $_GET['del_id'];
+    deleteUser($enrollee_id);
     header('location: ' . BASE_URL . 'admin/enrollees/index.php');
 }
 

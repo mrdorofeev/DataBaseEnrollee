@@ -306,3 +306,23 @@ function selectAllApplications(){
     dbCheckError($query);
     return $query->fetchAll();
 }
+
+
+//удаление пользователя (админом)
+function deleteUser($enrollee_id){
+    global $pdo;
+       
+    $sql = "delete from program_enrollee
+            where enrollee_id = $enrollee_id";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+
+    $sql = "delete from enrollees
+            where id =" . $enrollee_id;
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+}
